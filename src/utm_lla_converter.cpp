@@ -20,7 +20,7 @@ void ULConverter::PoseCallback(const geometry_msgs::PoseStamped::ConstPtr& msgs)
   basic bs;
   sensor_msgs::NavSatFix gps;
   gps.header = msgs->header;
-  
+
   //position from NDT
   double px = -bs.bx + msgs->pose.position.x ;
   double py = -bs.by + msgs->pose.position.y ;
@@ -34,7 +34,7 @@ void ULConverter::PoseCallback(const geometry_msgs::PoseStamped::ConstPtr& msgs)
   else if(hemi_ == "South")
    UTMConvert2LLA(SouthH, zone_, px, py, pz);
   else{
-    ROS_ERROR("only North or South Hemisphere. Are you on Mars?");
+    ROS_ERROR("only North or South Hemisphere. Are you on Mars???");
     ros::shutdown();
   }
     

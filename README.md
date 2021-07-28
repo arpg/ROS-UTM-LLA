@@ -13,6 +13,7 @@ catkin_make
 ```
 
 # Use
+open a terminal and run roslaunch
 ```
 roslaunch utm_lla coordinate_convertion.launch
 ```

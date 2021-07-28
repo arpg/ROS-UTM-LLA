@@ -25,7 +25,7 @@ int main(int argc, char **argv)
   if(n.getParam("hemisphere",hemisphere)){
     ROS_INFO("North hemisphere or south hemisphere? %s ",hemisphere.c_str());
     if(hemisphere != "North" && hemisphere != "South"){
-      ROS_ERROR("hemisphere only equals to North or South!");
+      ROS_ERROR("hemisphere only can equal to North or South!");
     }
   }
   else{
