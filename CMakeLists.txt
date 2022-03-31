@@ -4,6 +4,8 @@ project(utm_lla)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
+include(FetchContent)
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -15,7 +17,15 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 #test on 1.34
-find_package (GeographicLib REQUIRED)
+#find_package (GeographicLib REQUIRED)
+
+FetchContent_Declare(
+  GeographicLib
+  URL      https://iweb.dl.sourceforge.net/project/geographiclib/distrib/GeographicLib-1.52.tar.gz
+)
+
+FetchContent_MakeAvailable(GeographicLib)
+
 
 
 catkin_package(
@@ -37,5 +47,5 @@ include_directories(
 )
 
 add_executable(utm_lla_converter src/convert_ndt2lla.cpp src/utm_lla_converter.cpp)
-target_link_libraries(utm_lla_converter ${GeographicLib_LIBRARIES} ${catkin_LIBRARIES})
+target_link_libraries(utm_lla_converter GeographicLib ${catkin_LIBRARIES})
 
