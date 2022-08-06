@@ -1,7 +1,10 @@
 <launch>
     <!-- The following is denver UTM zone. check your UTM zone at  https://mangomap.com/robertyoung/maps/69585/what-utm-zone-am-i-in-# -->
-    <param name="utm_zone" type="int" value="13" />
-    <param name="hemisphere" type="string" value="North" />
+    <arg name="utm_zone" default="13" />
+    <arg name="hemisphere" default="North" />
+
+    <param name="utm_zone" type="int" value="$(arg utm_zone)" />
+    <param name="hemisphere" type="string" value="$(arg hemisphere)" />
     <node type="utm_lla_converter" pkg="utm_lla" name="utm_lla_converter" output="screen">
     </node>
 </launch>

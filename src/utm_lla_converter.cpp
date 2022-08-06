@@ -25,9 +25,9 @@ void ULConverter::PoseCallback(const geometry_msgs::PoseStamped::ConstPtr& msgs)
   double px = -bs.bx + msgs->pose.position.x ;
   double py = -bs.by + msgs->pose.position.y ;
   double pz = -bs.bz + msgs->pose.position.z;//height not change, just output unit in meters
-  ROS_INFO("Get data x: [%f]", px);
-  ROS_INFO("Get data y: [%f]", py);
-  ROS_INFO("Get data z: [%f]", pz);
+  ROS_DEBUG("Get data x: [%f]", px);
+  ROS_DEBUG("Get data y: [%f]", py);
+  ROS_DEBUG("Get data z: [%f]", pz);
   
   if(hemi_ == "North")
     UTMConvert2LLA(NorthH, zone_, px, py, pz);//hemisphere, zone, x, y, height
@@ -42,9 +42,9 @@ void ULConverter::PoseCallback(const geometry_msgs::PoseStamped::ConstPtr& msgs)
   gps.longitude = lla_[1];
   gps.altitude  = lla_[2];
   
-  ROS_INFO("Convert to lagitude: [%f]", lla_[0]);
-  ROS_INFO("Convert to longitude: [%f]", lla_[1]);
-  ROS_INFO("Convert to altitude: [%f]", lla_[2]);
+  ROS_DEBUG("Convert to lagitude: [%f]", lla_[0]);
+  ROS_DEBUG("Convert to longitude: [%f]", lla_[1]);
+  ROS_DEBUG("Convert to altitude: [%f]", lla_[2]);
   
   gps_pub_.publish(gps);
   lla_.clear();//don't forget this
@@ -53,9 +53,9 @@ void ULConverter::PoseCallback(const geometry_msgs::PoseStamped::ConstPtr& msgs)
 void ULConverter::GPSCallback(const sensor_msgs::NavSatFix::ConstPtr& msgs)
 {
   basic bs;
-  ROS_INFO("Get data lagitude from GPS: [%f]", msgs->latitude);
-  ROS_INFO("Get data longitude from GPS: [%f]", msgs->longitude);
-  ROS_INFO("Get data altitude from GPS: [%f]", msgs->altitude);
+  ROS_DEBUG("Get data lagitude from GPS: [%f]", msgs->latitude);
+  ROS_DEBUG("Get data longitude from GPS: [%f]", msgs->longitude);
+  ROS_DEBUG("Get data altitude from GPS: [%f]", msgs->altitude);
 
   if(hemi_ == "North")
     LLAConvert2UTM(NorthH, zone_, msgs->latitude, msgs->longitude, msgs->altitude);
@@ -73,9 +73,9 @@ void ULConverter::GPSCallback(const sensor_msgs::NavSatFix::ConstPtr& msgs)
   local_pose.pose.position.y = utm_[1] + bs.by;
   local_pose.pose.position.z = utm_[2] + bs.bz;
 
-  ROS_INFO("Convert to x: [%f]", local_pose.pose.position.x);
-  ROS_INFO("Convert to y: [%f]", local_pose.pose.position.y);
-  ROS_INFO("Convert to z: [%f]", local_pose.pose.position.z);
+  ROS_DEBUG("Convert to x: [%f]", local_pose.pose.position.x);
+  ROS_DEBUG("Convert to y: [%f]", local_pose.pose.position.y);
+  ROS_DEBUG("Convert to z: [%f]", local_pose.pose.position.z);
 
   xyz_pub_.publish(local_pose);
 
