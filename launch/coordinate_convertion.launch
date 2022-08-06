@@ -3,8 +3,8 @@
     <arg name="utm_zone" default="13" />
     <arg name="hemisphere" default="North" />
 
+    <param name="utm_zone" type="int" value="$(arg utm_zone)" />
+    <param name="hemisphere" type="string" value="$(arg hemisphere)" />
     <node type="utm_lla_converter" pkg="utm_lla" name="utm_lla_converter" output="screen">
-        <param name="utm_zone" type="int" value="$(arg utm_zone)" />
-        <param name="hemisphere" type="string" value="$(arg hemisphere)" />
     </node>
 </launch>
